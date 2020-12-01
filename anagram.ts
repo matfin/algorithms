@@ -21,14 +21,14 @@ const generateRandomAnagrams = (): string[] => {
 };
 
 
-const anagramDataSet = (): string[] => {
+const anagramDataSet = (count: number = 100): string => {
   const items: string[] = [];
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < count; i++) {
     items.push(...generateRandomAnagrams())
   }
 
-  return items;
+  return JSON.stringify(items);
 };
 
 /**
@@ -67,7 +67,8 @@ const measurePerformance = (slice: number = 100): void => {
   console.info(`Took ${Math.round(performance.now() - start)}ms with ${slice} items.`);
 };
 
-measurePerformance(30);
-measurePerformance(300);
-measurePerformance(3000);
+measurePerformance(10);
+measurePerformance(100);
+measurePerformance(1000);
+measurePerformance(10000);
 
