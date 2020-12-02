@@ -4,7 +4,7 @@ import anagrams from './testdata/inputs.json';
 enum Experiment {
   FASTER = 'fasterGroup',
   SLOW = 'slowGroup',
-  SUPER_SLOW = 'superSlowGroup',
+  SLOWER = 'slowerGroup',
 }
 
 /**
@@ -92,11 +92,12 @@ const slowGroup = (inputs: string[]): string[] => {
  * @param {string[]} inputs - inputs to be processed
  * @return {string[]} - processed outputs
  */
-const superSlowGroup = (inputs: string[]): string[] => {
+const slowerGroup = (inputs: string[]): string[] => {
   const resortedString = (input: string): string =>
     input.split('').sort().join('');
   const map: { [index: string]: string[] } = {};
-  const keys: string[] = inputs.filter((item: string, idx: number): boolean => inputs.indexOf(item) === idx);
+  const sorted: string[] = inputs.map((item: string): string => resortedString(item));
+  const keys: string[] = sorted.filter((item: string, idx: number): boolean => sorted.indexOf(item) === idx);
 
   keys.forEach((key: string): void => {
     map[key] = inputs.filter(
@@ -154,8 +155,8 @@ const measurePerformance = (slice: number = 100, experiment: Experiment): string
       output = slowGroup(inputs);
       break;
     }
-    case Experiment.SUPER_SLOW: {
-      output = superSlowGroup(inputs);
+    case Experiment.SLOWER: {
+      output = slowerGroup(inputs);
       break;
     }
   }
@@ -165,7 +166,7 @@ const measurePerformance = (slice: number = 100, experiment: Experiment): string
   return output;
 };
 
-console.info('Crunching number. Hang on.....')
-console.log(measurePerformance(10000, Experiment.SUPER_SLOW));
-console.log(measurePerformance(10000, Experiment.SLOW));
-console.log(measurePerformance(10000, Experiment.FASTER));
+console.info('Crunching numbers. Hang on.....')
+console.log(measurePerformance(5000, Experiment.FASTER));
+console.log(measurePerformance(5000, Experiment.SLOW));
+console.log(measurePerformance(5000, Experiment.SLOWER));

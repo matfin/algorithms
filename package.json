@@ -4,6 +4,9 @@
   "description": "Measuring performance in solutions to programming exercises",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "anagram": "ts-node anagram.ts"
+  },
   "devDependencies": {
     "@types/node": "^14.14.10",
     "prettier": "^2.2.1",
