@@ -166,7 +166,7 @@ const measurePerformance = (slice: number = 100, experiment: Experiment): string
   return output;
 };
 
-console.info('Crunching numbers. Hang on.....')
+console.info('Crunching numbers. Hang on.....');
 console.log(measurePerformance(5000, Experiment.FASTER));
 console.log(measurePerformance(5000, Experiment.SLOW));
 console.log(measurePerformance(5000, Experiment.SLOWER));
